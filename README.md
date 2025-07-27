@@ -20,7 +20,7 @@ This project documents a complete, personal home lab infrastructure based on com
 
 ### NAS B — Cold Backup (All SSD)
 - **Model**: Lenovo ThinkCentre M720s SFF
-- **CPU**: Intel i5-9500
+- **CPU**: Intel i5-9500 (planned: i7-8500T/low power)
 - **RAM**: 64 GB DDR4 DIMM (2666 MHz)
 - **OS**: TrueNAS Scale (bare metal)
 - **Storage**:
