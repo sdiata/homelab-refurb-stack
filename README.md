@@ -54,5 +54,5 @@ This project documents a complete, personal home lab infrastructure based on com
 
 ---
 
-Maintained by @sdia(https://github.com/sdiata) · All feedback welcome!
+Maintained by @sdiata(https://github.com/sdiata) · All feedback welcome!
 
