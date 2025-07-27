@@ -36,6 +36,7 @@ This project documents a complete, personal home lab infrastructure based on com
 - **Storage**:
   - VM disk: 1 TB NVMe
   - VM data/backup: 2 TB SSD SATA
+- **Network**: 2.5 GbE native
 - **Role**: Lightweight VMs (Home Assistant, Node-RED, MQTT, Immich, Grafana etc.)
 
 ## 🎯 Project Goals
