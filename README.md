@@ -13,7 +13,7 @@ This project documents a complete, personal home lab infrastructure based on com
 - **Storage**:
   - Boot pool: 2× 240 GB NVMe (ZFS mirror)
   - App pool: 2× 1 TB SSD SATA (ZFS mirror)
-  - Critical data: 2× 1 TB NVMe (ZFS mirror)
+  - Critical data: 2× 2 TB NVMe (ZFS mirror)
   - Media/Backups: 3× 12 TB HDD (RAID-Z1)
 - **Network**: 2.5 GbE native
 - **Role**: Primary storage, Jellyfin, Time Machine, Nextcloud, etc.
