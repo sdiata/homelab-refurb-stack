@@ -1,3 +1,7 @@
+---
+title: Home Lab — Low Power, Full SSD Backup, Refurb ThinkCentre Architecture
+layout: default
+---
 # Home Lab Project 🧪
 
 A self-hosted home infrastructure built on energy-efficient, refurbished Lenovo ThinkCentre machines using Kingston SSDs and RAM.
