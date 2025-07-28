@@ -6,7 +6,7 @@ This project documents a complete, personal home lab infrastructure based on com
 
 ## 🔧 Hardware Architecture
 
-### NAS A — Main Storage & Services
+### Server A — Main Storage & Services
 - **CPU**: Intel N100 (quad-core)
 - **RAM**: 32 GB DDR4
 - **OS**: TrueNAS Scale
@@ -18,26 +18,53 @@ This project documents a complete, personal home lab infrastructure based on com
 - **Network**: 2.5 GbE native
 - **Role**: Primary storage, Jellyfin, Time Machine, Nextcloud, etc.
 
-### NAS B — Cold Backup (All SSD)
+### Server B — Cold Backup (All SSD)
 - **Model**: Lenovo ThinkCentre M720s SFF
 - **CPU**: Intel i5-9500 (planned: i7-8500T/low power)
 - **RAM**: 64 GB DDR4 DIMM (2666 MHz)
 - **OS**: TrueNAS Scale (bare metal)
 - **Storage**:
-  - Boot: 250 GB NVMe
+  - Boot: 500 GB NVMe
   - Replication pool: 4× 2 TB SSD SATA (RAID-Z1)
 - **Network**: Realtek RTL8125B 2.5 GbE PCIe x1
 - **Role**: Cold replication of critical datasets from NAS A
 
-### NAS C — Services & Virtualization (Proxmox VE)
+### Server C — Services & Virtualization (Proxmox VE)
 - **Model**: Lenovo ThinkCentre M720q Tiny
 - **CPU**: Intel i5-8500T (planned: i7-8700T or i9-9900T)
-- **RAM**: 64–128 GB DDR4 SODIMM (2666 MHz)
+- **RAM**: 128 GB DDR4 SODIMM (2666 MHz)
 - **Storage**:
   - VM disk: 1 TB NVMe
   - VM data/backup: 2 TB SSD SATA
 - **Network**: 2.5 GbE native
 - **Role**: Lightweight VMs (Home Assistant, Node-RED, MQTT, Immich, Grafana etc.)
+
+## 🚀 Planned Services & Applications
+
+### **Server A — Core Services**
+* **Media Stack**: Jellyfin (4K streaming), Sonarr, Radarr, Prowlarr
+* **File Sync**: Nextcloud (self-hosted cloud storage)
+* **Backup**: Time Machine targets for macOS clients
+* **Network**: Pi-hole (DNS filtering), Unbound (recursive DNS)
+
+### **Server C — Virtualized Services**
+* **Home Automation**: Home Assistant + Node-RED (50+ IoT devices)
+* **Photo Management**: Immich (AI-powered Google Photos alternative)
+* **Surveillance**: Frigate NVR + Coral TPU (AI object detection)
+* **AI/ML**: Ollama (local LLM inference), Whisper (speech-to-text)
+* **Monitoring**: Grafana, InfluxDB, Prometheus, Node Exporter
+* **Remote Access**: Cloudflare Tunnel (secure external access)
+
+### **Infrastructure Services**
+* **Storage**: ZFS replication (A → B), automated snapshots
+* **Network**: VLAN segmentation (IoT/Services/Management/Storage)
+* **Security**: Zero Trust access, SSL termination, DDoS protection
+
+## 📈 Build Progress
+- [x] Server A operational (Intel N100 + 32GB)
+- [ ] Server B completion (awaiting DDR4 & SSD components)
+- [ ] Server C deployment (awaiting NVMe & 128GB DDR4)
+- [ ] Full stack integration & testing
 
 ## 🎯 Project Goals
 
@@ -46,6 +73,9 @@ This project documents a complete, personal home lab infrastructure based on com
 - 🔐 Data safety via ZFS replication
 - ♻️ Full use of refurbished & recycled hardware
 - 🌐 Open-source stack (Proxmox, TrueNAS, HA, Immich...)
+- 📚 Complete documentation for community replication
+- 🎥 Video tutorials and build guides
+- 🔬 Long-term reliability validation (6+ months uptime)
 
 ## 🧪 Next Steps
 
@@ -53,6 +83,11 @@ This project documents a complete, personal home lab infrastructure based on com
 - Storage benchmarks & power consumption metrics
 - Service migration and CI/CD for HA deployments
 
+## 🌟 Community Impact
+- GitHub documentation for replication
+- YouTube build series (planned Q4 2025)
+- Collaboration with homelab creators
+- French + English tutorials for broader reach
 ---
 
 Maintained by @sdiata(https://github.com/sdiata) · All feedback welcome!
