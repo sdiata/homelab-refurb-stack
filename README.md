@@ -32,7 +32,7 @@ This project documents a complete, personal home lab infrastructure based on com
 ### Server C — Services & Virtualization (Proxmox VE)
 - **Model**: Lenovo ThinkCentre M720q Tiny
 - **CPU**: Intel i5-8500T (planned: i7-8700T or i9-9900T /low power)
-- **RAM**: 128 GB DDR4 SODIMM (2666 MHz)
+- **RAM**: 64GB DDR4 SODIMM (2666 MHz)
 - **Storage**:
   - VM disk: 1 TB NVMe
   - VM data/backup: 2 TB SSD SATA
