@@ -41,29 +41,25 @@ Internet
 - **Remote access**: Internet → Cloudflare → Lab
 - **Control**: Mac → VNC/SSH → Servers
 
-###🌐 Network Architecture
+## 🌐 Network Architecture
 
-**Physical Layer**
+### Physical Layer
+- **Switch**: Managed 2.5GbE (4+ ports)
+- **Connections**: A, B, C → 2.5GbE | D → 1GbE
+- **Uplink**: ISP router/modem
 
-- Switch: Managed 2.5GbE (4+ ports)
-- Connections: A, B, C → 2.5GbE | D → 1GbE
-- Uplink: ISP router/modem
+### Logical Layer  
+- **Management VLAN**: Server admin access
+- **IoT VLAN**: Smart home devices (isolated)
+- **Services VLAN**: Internal lab communication
+- **Guest VLAN**: Visitor network isolation
 
-**Logical Layer**
+### External Access
+- **Primary**: Netbird mesh VPN
+- **Backup**: Cloudflare tunnels
+- **Philosophy**: Zero port forwarding
 
-- Management VLAN: Server admin access
-- IoT VLAN: Smart home devices (isolated)
-- Services VLAN: Internal lab communication
-- Guest VLAN: Visitor network isolation
-
-**External Access**
-
-- Primary: Netbird mesh VPN
-- Backup: Cloudflare tunnels
-Philosophy: Zero port forwarding##
-
-
-##🖥️ Server Details
+## 🖥️ Server Details
 
 ### 🗄️ Server A - TrueNAS Hub
 **Role**: Centralized storage, backup, file sharing
