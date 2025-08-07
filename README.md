@@ -1,94 +1,217 @@
-# 🏠 Home Lab — Low-Power, Full-Featured NAS & Services Architecture
+# 🏠 4-Server Homelab - Compact & Eco-Friendly Self-Hosting
 
-This project documents a complete, personal home lab infrastructure based on compact, energy-efficient refurbished Lenovo ThinkCentre mini-PCs.
+> **Professional architecture at affordable price - Budget ~€1100-1200**  
+> *Refurbish first, No e-waste, Low power, Accessible to all*
 
-> The goal: demonstrate that a full-featured, scalable homelab can be built using second-hand hardware, without noisy racks or new equipment — and still be reliable, efficient, and modern.
+## 🎯 Project Philosophy
 
-## 🔧 Hardware Architecture
+This homelab demonstrates that it's possible to create a complete personal infrastructure without breaking the bank or polluting the environment. By prioritizing refurbished hardware and a progressive approach, we achieve professional performance at homelab budget.
 
-### Server A — Main Storage & Services (OPERATIONAL)
-- **CPU**: Intel N100 (quad-core)
-- **RAM**: 32 GB DDR4
-- **OS**: TrueNAS Scale
+**Core values:**
+- ♻️ **Eco-friendly**: Reuse enterprise hardware
+- ⚡ **Low-power**: Controlled consumption (~150W total)
+- 💰 **Accessible**: Realistic budget for everyone
+- 📈 **Scalable**: Progressive scaling
+- 🔒 **Sovereign**: Exit Google Drive, iCloud & co
+
+## 🏗️ Architecture Overview
+
+### System Overview
+
+**Simple Architecture:**
+
+```
+Internet
+    ↕
+[Router 2.5GbE]
+    ↕
+┌───────────────────────────────────────┐
+│            LOCAL NETWORK              │
+│                                       │
+│  [A] ←→ [B] ←→ [C] ←→ [D]            │
+│   │      │      │      │              │
+│ TrueNAS  AI   Services Backup         │
+│ 36TB   Photos Smart Home Archives     │
+└───────────────────────────────────────┘
+```
+
+**Main flows:**
+- **Photo upload**: Smartphone → B (Immich) → A (storage)
+- **Daily backup**: A → D (replication)  
+- **Remote access**: Internet → Cloudflare → Lab
+- **Control**: Mac → VNC/SSH → Servers
+
+## 🖥️ Server Details
+
+### 🗄️ Server A - TrueNAS Hub
+**Role**: Centralized storage, backup, file sharing
+- **Status**: ✅ Already built (December 2024)
+- **CPU**: Intel N100 (4c/4t, 6W)
+- **RAM**: 32GB DDR4
 - **Storage**:
-  - Boot pool: 2× 500GB NVMe (ZFS mirror)
-  - App pool: 2× 1TB SSD SATA (ZFS mirror)
-  - Critical data: 2× 2TB NVMe (ZFS mirror)
-  - Media/Backups: 3× 12TB HDD (RAID-Z1)
-- **Network**: 2.5 GbE native
-- **Role**: Primary storage, Jellyfin, Time Machine, Nextcloud, etc.
+  - Boot: 2×250GB NVMe mirror
+  - Fast Pool: 2×1TB NVMe mirror
+  - Storage: 3×12TB HDD RAID-Z1 (24TB net)
+  - L2ARC: 250GB SSD dedicated (Immich photos)
+- **Services**: TrueNAS Scale, Filebrowser, SMB/NFS, PiHole (backup)
 
-### Server B — Cold Backup (All SSD)
-- **Model**: Lenovo ThinkCentre M720s SFF
-- **CPU**: Intel i5-9500 (planned: i5-8500T or i7-8700T /low power)
-- **RAM**: 64 GB DDR4 DIMM (2666 MHz)
-- **OS**: TrueNAS Scale (bare metal)
+### 🤖 Server B - AI & Creative
+**Role**: Artificial intelligence, multimedia processing
+- **Machine**: Lenovo M720s SFF (refurbished)
+- **CPU**: Intel i5-9400 (6c/6t)
+- **RAM**: 64GB DDR4 (→128GB Phase 3)
 - **Storage**:
-  - Boot: 500GB NVMe
-  - Replication pool: 4× 2TB SSD SATA (RAID-Z1)
-- **Network**: Realtek RTL8125B 2.5 GbE PCIe x1
-- **Role**: Cold replication of critical datasets from NAS A
+  - Boot: 2×250GB SSD mirror (Crucial BX reused)
+  - VMs: 2×1TB KC600 mirror (Proxmox + Ollama)
+  - Immich: 2TB T500 NVMe Gen4 (+ ZIL/SLOG partition)
+- **GPU**: RTX A2000 (Phase 3)
+- **Services**: Proxmox, Immich, Ollama, DaVinci Resolve, GIMP
 
-### Server C — Services & Virtualization (Proxmox VE)
-- **Model**: Lenovo ThinkCentre M720q Tiny
-- **CPU**: Intel i5-8500T (planned: i7-8700T or i9-9900T /low power)
-- **RAM**: 64GB DDR4 SODIMM (2666 MHz)
+### 🏠 Server C - Home Services  
+**Role**: Home automation, surveillance, network services
+- **Machine**: Lenovo M720q Tiny (refurbished)
+- **CPU**: Intel i5-8500T (6c/6t, 35W)
+- **RAM**: 64GB SODIMM DDR4
+- **Storage**: 1TB T500 NVMe Gen4
+- **Services**: 
+  - Proxmox hypervisor
+  - Home Assistant (smart home)
+  - DSM VM (doorbell surveillance)
+  - Zigbee2MQTT, Cloudflared, Netbird VPN
+
+### 💾 Server D - Replication & Archive
+**Role**: Backup, replication, cold storage
+- **Machine**: HP EliteDesk 800 G4 SFF (refurbished)
+- **CPU**: Intel i5-8500 (6c/6t, 65W)
+- **RAM**: 16GB DDR4 (existing)
 - **Storage**:
-  - VM disk: 1 TB NVMe
-  - VM data/backup: 2 TB SSD SATA
-- **Network**: 2.5 GbE native
-- **Role**: Lightweight VMs (Home Assistant, Node-RED, MQTT, Immich, Grafana etc.) + Ollama (LLMs)
+  - Boot: 2×250GB NVMe WD mirror
+  - Archive: 2×4TB HDD (Synology recovery)
+  - Fast: 2×1TB SSD mirror (Server A recovery)
+  - Offline: 6TB USB external (air-gap backup)
+- **Services**: TrueNAS Scale, daily replication, centralized monitoring
 
-## 🚀 Planned Services & Applications
+## 💰 Indicative Budget
 
-### **Server A — Core Services**
-* **Media Stack**: Jellyfin (4K streaming), Sonarr, Radarr, Prowlarr
-* **File Sync**: Nextcloud (self-hosted cloud storage)
-* **Backup**: Time Machine targets for macOS clients
+**Total lab cost: ~€1100-1200**
 
-### **Server C — Virtualized Services**
-* **Home Automation**: Home Assistant + Node-RED (50+ IoT devices)
-* **Photo Management**: Immich (AI-powered Google Photos alternative)
-* **Surveillance**: Frigate NVR + Coral TPU (AI object detection)
-* **AI/ML**: Ollama (local LLM inference), Whisper (speech-to-text)
-* **Monitoring**: Grafana, InfluxDB, Prometheus, Node Exporter
-* **Remote Access**: Cloudflare Tunnel (secure external access)
-* **Network**: Pi-hole (DNS filtering), Unbound (recursive DNS)
+| Server | Budget | Notes |
+|---------|--------|-------|
+| **Server A** | TrueNAS Hub in prod | Already built |
+| **Server B** | ~€550-600 | AI & creative |
+| **Server C** | ~€350-400 | Compact services |
+| **Server D** | ~€200-250 | Backup & monitoring |
 
-### **Infrastructure Services**
-* **Storage**: ZFS replication (A → B), automated snapshots
-* **Network**: VLAN segmentation (IoT/Services/Management/Storage)
-* **Security**: Zero Trust access, SSL termination, DDoS protection
+**Upgrades:**
+- **+€70**: Coral TPU (Phase 2)
+- **+€400**: RTX A2000 + 64GB RAM (Phase 3)
 
-## 📈 Build Progress
-- [x] Server A operational (Intel N100 + 32GB) (OPERATIONAL)
-- [ ] Server B completion (awaiting DDR4 & SSD components)
-- [ ] Server C deployment (awaiting NVMe & 128GB DDR4)
-- [ ] Full stack integration & testing
+*Indicative prices FR second-hand market - Variable according to opportunities*
 
-## 🎯 Project Goals
+## 🚀 Scaling Phases
 
-- 💡 Minimal power usage (< 30W per node)
-- 🧩 Scalable design (RAID-Z, VMs, VLANs)
-- 🔐 Data safety via ZFS replication
-- ♻️ Full use of refurbished & recycled hardware
-- 🌐 Open-source stack (Proxmox, TrueNAS, HA, Immich...)
-- 📚 Complete documentation for community replication
-- 🎥 Video tutorials and build guides
-- 🔬 Long-term reliability validation (6+ months uptime)
+### Phase 1 - Base Infrastructure
+- **Goal**: Complete functional lab
+- **Services**: Storage, smart home, surveillance
+- **AI**: CPU only (light Ollama)
 
-## 🧪 Next Steps
+### Phase 2 - AI Acceleration
+- **Addition**: Coral TPU USB
+- **Gain**: Ultra-fast object detection Immich
+- **Consumption**: +2W only
 
-- Network topology with VLANs & firewall rules
-- Storage benchmarks & power consumption metrics
-- Service migration and CI/CD for HA deployments
+### Phase 3 - Creative Power
+- **Addition**: RTX A2000 + 64GB additional RAM
+- **Capabilities**: 4K editing, generative AI, GPU rendering
+- **Usage**: Complete creative studio controlled from Mac
 
-## 🌟 Community Impact
-- GitHub documentation for replication
-- YouTube build series (planned Q4 2025)
-- Collaboration with homelab creators
-- French + English tutorials for broader reach
+## 🌟 Key Features
+
+### Technical
+- **Redundancy**: Mirrors on all critical components
+- **Performance**: NVMe Gen4, intelligent L2ARC, 2.5GbE
+- **Security**: Triple backup (A→D→USB offline)
+- **Monitoring**: Complete lab supervision
+
+### Economic
+- **Fast ROI**: 2-year payback vs cloud (Drive + iCloud)
+- **Scalability**: Progressive investment according to needs
+- **Durability**: Enterprise hardware, easily found parts
+
+### Environmental
+- **No e-waste**: Second life for enterprise machines
+- **Low power**: 35W TDP after CPU upgrades
+- **Compact**: Minimal footprint vs traditional racks
+
+## 🎯 Use Cases
+
+### Complete Self-Hosting
+- **Photos**: Immich with AI (exit Google Photos)
+- **Files**: Filebrowser + Cloudflare (exit Google Drive)
+- **Smart Home**: Home Assistant + Zigbee
+- **Surveillance**: DSM + IP cameras
+
+### Creativity & AI
+- **Photo**: RawTherapee + GIMP (RAW workflow)
+- **Video**: DaVinci Resolve (pro editing)
+- **AI**: Ollama LLMs + Stable Diffusion
+- **Control**: Mac interface → Lab power
+
+## 🔧 Technical Prerequisites
+
+### Knowledge
+- **Linux**: Basic system administration
+- **Docker**: Service containerization
+- **Network**: VLANs, routing, DNS
+- **Backup**: 3-2-1 strategies
+
+### Tools
+- **Proxmox**: Type-1 hypervisor
+- **TrueNAS**: ZFS, snapshots, replication
+- **Docker Compose**: Service orchestration
+- **Cloudflare**: Secure tunnels
+
+## 📚 Repository Structure
+
+```
+📁 homelab/
+├── 📄 README.md (this file)
+├── 📁 hardware/
+│   ├── server-a-truenas.md
+│   ├── server-b-ai.md
+│   ├── server-c-services.md
+│   └── server-d-replication.md
+├── 📁 budget/
+│   ├── detailed-costs.md
+│   └── purchase-sources.md
+├── 📁 setup/
+│   ├── truenas-installation.md
+│   ├── proxmox-configuration.md
+│   └── docker-services.md
+├── 📁 configs/
+│   ├── docker-compose/
+│   ├── scripts/
+│   └── monitoring/
+└── 📁 docs/
+    ├── network-setup.md
+    ├── backup-strategy.md
+    └── troubleshooting.md
+```
+
+## 🤝 Contribution
+
+This project aims to democratize self-hosting. Your feedback, improvements and adaptations are welcome!
+
+**Philosophy**: *Accessible, documented, reproducible*
+
 ---
 
-Maintained by @sdiata(https://github.com/sdiata) · All feedback welcome!
+*"A €1000 lab that replaces €200/year of cloud, it's worth it!"* 💪
 
+## 📞 Support & Community
+
+- **Issues**: Technical questions, bugs, improvements
+- **Discussions**: Adaptations, feedback
+- **Wiki**: Community documentation
+
+**Happy self-hosting!** 🏠✨
