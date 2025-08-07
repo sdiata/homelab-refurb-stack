@@ -1,5 +1,7 @@
 # 🏠 Server C - Home Services Hardware
 
+⚠️ **UNDER CONSTRUCTION** - Hardware sourcing in progress
+
 ## Overview
 
 **Role**: Home automation, surveillance, network services  
