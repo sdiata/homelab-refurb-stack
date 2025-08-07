@@ -41,7 +41,7 @@ Internet
 - **Remote access**: Internet → Cloudflare → Lab
 - **Control**: Mac → VNC/SSH → Servers
 
-🌐 Network Architecture
+###🌐 Network Architecture
 
 **Physical Layer**
 
@@ -63,7 +63,7 @@ Internet
 Philosophy: Zero port forwarding##
 
 
-🖥️ Server Details
+##🖥️ Server Details
 
 ### 🗄️ Server A - TrueNAS Hub
 **Role**: Centralized storage, backup, file sharing
